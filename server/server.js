@@ -2,8 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const cors = require("cors");
-const Hero = require("./models/hero");
+const Hero = require("./model/Avenger");
 
 app.use(express.json());
 
@@ -15,6 +14,13 @@ app.use((req, res, next) => {
   );
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   next();
+});
+
+app.options('*', (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.sendStatus(200);
 });
 
 
@@ -38,7 +44,7 @@ app.post("/heroes", (req, res, next) => {
     thumbnail: req.body.thumbnail,
     urls: req.body.urls
   });
-  
+
   hero
     .save()
     .then(() => {
