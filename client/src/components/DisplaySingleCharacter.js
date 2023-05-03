@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 const DisplaySingleCharacter = ({ singleCharacter }) => {
 const [story, setStory] = useState([]);
+
 console.log('displaySingle', singleCharacter);
 const url = singleCharacter.urls[0].url;
 console.log('url', url);

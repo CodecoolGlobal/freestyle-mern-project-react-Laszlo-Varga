@@ -15,7 +15,7 @@ function MarvelCharacters() {
     const [timestamp, apiKey, hashValue] = [ts, publicKey, hash];
 
     const url = `https://gateway.marvel.com:443/v1/public/characters?limit=100&ts=${timestamp}&apikey=${apiKey}&hash=${hashValue}`;
-
+    
     async function getCharacters(url) {
       const charactersRes = await fetch(url);
       const charactersArray = await charactersRes.json();
