@@ -15,7 +15,7 @@ function MarvelCharacters() {
   const [showCharacter, setShowCharacter] = useState(false);
   const [myAvengersClicked, setMyAvengersClicked] = useState(false);
   const [ isAnimation,setIsAnimation ] = useState(true);
-  
+  const [showMyAvengers, setShowMyAvengers] = useState(false);
 
 
 
@@ -128,46 +128,59 @@ const handleInfoButton =()=>{
 
   const handleCloseCharacter = () => {
     setShowCharacter(false);
+ setShowMyAvengers(false)
   };
-
+const handleMyAvengersButtonClick = () => {
+  setShowMyAvengers(!showMyAvengers);
+};
 
 setTimeout(()=>{ 
 setIsAnimation(false);
  },7000)
 
- return (
-   <div>
-     {isAnimation && (
-       <div>
-         <Animation />
-       </div>
-     )}
+  return (
+    <div>
+      {isAnimation && (
+        <div>
+          <Animation />
+        </div>
+      )}
 
-     {!showCharacter && !isAnimation && (
-       <div>
-         <SearchBar
-           placeholder="Search here"
-           handleChange={handleChange}
-           searchInput={searchInput}
-         />
-         <DisplayCharacters
-           characters={filteredCharacters}
-           handleCharacterClick={handleCharacterClick}
-           handleCharacterInfoClick={handleCharacterInfoClick}
-         />
-       </div>
-     )}
-     {showCharacter && !isAnimation && (
-       <DisplaySingleCharacter
-         character={character}
-         characterInfoClick={clickHandler}
-         handleCharacterClick={handleCharacterClick}
-         handleCloseCharacter={handleCloseCharacter}
-       />
-     )}
-   </div>
- );
+      {!showCharacter && !isAnimation && !showMyAvengers && (
+        <div>
+          <SearchBar
+            placeholder="Search here"
+            handleChange={handleChange}
+            searchInput={searchInput}
+          />
+          <button onClick={handleMyAvengersButtonClick}>My Avengers</button>
+        </div>
+      )}
 
+      {!showCharacter && !isAnimation && !showMyAvengers && (
+        <DisplayCharacters
+          characters={filteredCharacters}
+          handleCharacterClick={handleCharacterClick}
+          handleCharacterInfoClick={handleCharacterInfoClick}
+        />
+      )}
+
+      {!showCharacter && !isAnimation && showMyAvengers && (
+        <MyAvengers handleRemoveCharacter={handleRemoveCharacter} 
+        handleCloseCharacter={handleCloseCharacter}/>
+      )}
+
+      {showCharacter && !isAnimation && (
+        <DisplaySingleCharacter
+          character={character}
+          characterInfoClick={clickHandler}
+          handleCharacterClick={handleCharacterClick}
+          handleCloseCharacter={handleCloseCharacter}
+        />
+      )}
+    </div>
+  );
 }
+
 
 export default MarvelCharacters;

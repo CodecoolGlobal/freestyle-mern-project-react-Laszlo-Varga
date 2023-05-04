@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const MyAvengers = ({ handleRemoveCharacter }) => {
+const MyAvengers = ({ handleRemoveCharacter,handleCloseCharacter }) => {
   const [avengers, setAvengers] = useState([]);
 
   useEffect(() => {
@@ -23,9 +23,12 @@ console.log(avengersFetched)
             src={`${avenger.thumbnail.path}.${avenger.thumbnail.extension}`}
             alt={avenger.name}
           />
-          <button onClick={() => handleRemoveCharacter(avenger)}>Remove from team</button>
+          <button onClick={() => handleRemoveCharacter(avenger)}>
+            Remove from team
+          </button>
         </div>
       ))}
+      <button onClick={handleCloseCharacter}>Back</button>
     </div>
   );
 };
