@@ -61,6 +61,21 @@ app.post("/heroes", (req, res, next) => {
     });
 })
 
+app.delete('/heroes/:id', (req, res) => {
+  console.log(req.params);
+  Hero.deleteOne({ _id: req.params.id })
+  .then(() => {
+    res.status(201).json({
+      message: "Hero removed from team",
+    });
+  })
+  .catch((error) => {
+    res.status(400).json({
+      error: error,
+    })
+  })
+});
+
 mongoose
   .connect(
     "mongodb+srv://silverhornvargalaci:Ks2XTrXxPBVbq6Vx@cluster0.hxgfust.mongodb.net/AVENGERS?retryWrites=true&w=majority"
