@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "../App.css"
 
 const MyAvengers = ({ handleRemoveCharacter,handleCloseCharacter }) => {
   const [avengers, setAvengers] = useState([]);
@@ -23,9 +24,11 @@ console.log(avengersFetched)
             src={`${avenger.thumbnail.path}.${avenger.thumbnail.extension}`}
             alt={avenger.name}
           />
+          <div className="buttonContainer">
           <button onClick={() => handleRemoveCharacter(avenger)}>
             Remove from team
           </button>
+          </div>
         </div>
       ))}
       <button onClick={handleCloseCharacter}>Back</button>

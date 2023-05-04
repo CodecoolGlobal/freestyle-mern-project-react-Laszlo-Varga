@@ -7,3 +7,83 @@
   pointer-events: none;
 }
 
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  border-radius: 30;
+}
+
+
+.mainImage{
+  opacity: 1;
+  width: 200px;
+  height: 200px;
+  margin: 6px;
+  border: 1px solid black;
+  transition: .5s ease;
+  cursor: pointer;
+}
+.mainImage:hover {
+  opacity: 0.3;
+}
+.mainImage:hover ~ .middle {
+  opacity: 0.9;
+}
+.middle:hover{
+  opacity: 0.9;
+}
+.middle:hover ~ .mainImage{
+  opacity: 0.3;
+}
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  bottom: 20px;
+  right: -10px;
+  transform: skew(-20deg);
+  text-align: center;
+}
+.namebox{
+    background-color: white;
+    color: red;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px 20px;
+}
+
+
+.allCardsContainer{
+  
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.cardContainer{
+ position: relative;
+}
+.buttonContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+ 
+  
+}
+button{
+  height: 40px;
+  border-radius: 30;
+}
+.font-link{
+  font-family: 'Marvel', sans-serif;
+}

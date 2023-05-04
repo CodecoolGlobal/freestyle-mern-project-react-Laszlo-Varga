@@ -19,11 +19,7 @@ function DisplayCharacters({
             <div className="middle">
               <div className="namebox">{character.name}</div>
             </div>
-            <div className="buttonContainer">
-          
             
-             
-            </div>
           </div>
         ) : (
           <div key={character.id}></div>

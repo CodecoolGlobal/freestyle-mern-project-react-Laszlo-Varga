@@ -1,4 +1,5 @@
 import React from "react";
+import '../App.css'
 
 const DisplaySingleCharacter = ({character, handleCharacterClick, handleCloseCharacter,
 }) => {
@@ -27,8 +28,13 @@ const DisplaySingleCharacter = ({character, handleCharacterClick, handleCloseCha
       <h5>Stories:</h5>
       <ul>{displayItems(character.stories.items)}</ul>
 
+      <div className="buttonContainer">
+          
+            
       <button onClick={() => handleCharacterClick(character)}>Save</button>
       <button onClick={handleCloseCharacter}>Back</button>
+             
+            </div>
     
     </div>
   );
