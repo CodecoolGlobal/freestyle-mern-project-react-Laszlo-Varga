@@ -1,28 +1,36 @@
-import React, { useState } from "react";
+import React from "react";
 
-const DisplaySingleCharacter = ({ singleCharacter }) => {
-const [story, setStory] = useState([]);
+const DisplaySingleCharacter = ({
+  character,
+  handleCharacterClick,
+  handleCloseCharacter,
+}) => {
+  console.log(character);
 
-console.log('displaySingle', singleCharacter);
-const url = singleCharacter.urls[0].url;
-console.log('url', url);
-
-  async function getStory(url) {
-    const storyRes = await fetch(url);
-    const storyArray = await storyRes.json();
-   setStory(storyArray);
-  }
-  getStory();
+  const displayItems = (items) => {
+    return items.map((item, index) => <li key={index}>{item.name}</li>);
+  };
 
   return (
     <div>
-      <h3>{singleCharacter.name}</h3>
+      <h3>{character.name}</h3>
       <img
-        src={`${singleCharacter.thumbnail.path}.${singleCharacter.thumbnail.extension}`}
-        alt={singleCharacter.name}
+        src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+        alt={character.name}
       />
-      <h4>{singleCharacter.description}</h4>
-      <h4>{story}</h4>
+      <h4>{character.description}</h4>
+
+      <h5>Comics:</h5>
+      <ul>{displayItems(character.comics.items)}</ul>
+
+      <h5>Series:</h5>
+      <ul>{displayItems(character.series.items)}</ul>
+
+      <h5>Stories:</h5>
+      <ul>{displayItems(character.stories.items)}</ul>
+
+      <button onClick={() => handleCharacterClick()}>Save</button>
+      <button onClick={handleCloseCharacter}>Close</button>
     </div>
   );
 };

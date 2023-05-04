@@ -1,6 +1,6 @@
 import {React} from "react";
  
-function DisplayCharacters({characters,handleCharacterClick}){
+function DisplayCharacters({characters,handleCharacterClick,}){
 
 return (
 
@@ -13,6 +13,7 @@ return (
             alt={character.name}
           />
         <button onClick={() => handleCharacterClick(character)}>Add to Favorites</button>
+      
         </div>
       ))}
     </div>
