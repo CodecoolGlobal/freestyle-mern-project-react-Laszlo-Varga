@@ -1,13 +1,11 @@
 import React from "react";
 
-const DisplaySingleCharacter = ({
-  character,
-  handleCharacterClick,
-  handleCloseCharacter,
+const DisplaySingleCharacter = ({character, handleCharacterClick, handleCloseCharacter,
 }) => {
   console.log(character);
 
   const displayItems = (items) => {
+    console.log(items)
     return items.map((item, index) => <li key={index}>{item.name}</li>);
   };
 
@@ -29,8 +27,9 @@ const DisplaySingleCharacter = ({
       <h5>Stories:</h5>
       <ul>{displayItems(character.stories.items)}</ul>
 
-      <button onClick={() => handleCharacterClick()}>Save</button>
-      <button onClick={handleCloseCharacter}>Close</button>
+      <button onClick={() => handleCharacterClick(character)}>Save</button>
+      <button onClick={handleCloseCharacter}>Back</button>
+    
     </div>
   );
 };

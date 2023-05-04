@@ -7,7 +7,7 @@ const MyAvengers = ({ handleRemoveCharacter }) => {
     async function getAvengers() {
       const response = await fetch("/heroes");
       const avengersFetched = await response.json();
-
+console.log(avengersFetched)
       setAvengers(avengersFetched);
     }
     getAvengers();
