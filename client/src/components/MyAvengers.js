@@ -1,14 +1,39 @@
 import React, { useState, useEffect } from "react";
 import "../App.css"
 
-const MyAvengers = ({ handleRemoveCharacter,handleCloseCharacter }) => {
+const MyAvengers = ({handleCloseCharacter }) => {
   const [avengers, setAvengers] = useState([]);
+
+const handleRemoveCharacter =  (avenger) => {
+   fetch(`http://localhost:3000/heroes/${avenger._id}`, {
+    method: "Delete",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(avenger),
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error("Something went wrong");
+    })
+    .then((data) => {
+      console.log(data);
+    return fetch("/heroes")
+    })
+    .then((response)=>{return response.json()})
+    .then((heroes)=>{
+      setAvengers(heroes)
+    })
+  .catch((err) => console.log(err));
+
+  };
+
 
   useEffect(() => {
     async function getAvengers() {
       const response = await fetch("/heroes");
       const avengersFetched = await response.json();
-console.log(avengersFetched)
+
       setAvengers(avengersFetched);
     }
     getAvengers();

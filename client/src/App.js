@@ -13,7 +13,6 @@ function MarvelCharacters() {
   const [character, setCharacter] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [showCharacter, setShowCharacter] = useState(false);
-  const [myAvengersClicked, setMyAvengersClicked] = useState(false);
   const [ isAnimation,setIsAnimation ] = useState(true);
   const [showMyAvengers, setShowMyAvengers] = useState(false);
 
@@ -72,21 +71,16 @@ function MarvelCharacters() {
     setSearchInput(e.target.value);
   };
 
-const characterInfoClick = ()=>{ 
-   setShowCharacter(true); 
- }
+
 
   const handleCharacterClick = (character) => {
     setCharacter(character);
- 
     console.log(character);
     clickHandler(character);
   };
 
 
-const handleInfoButton =()=>{
-  setShowCharacter(true);
-}
+
 
 
   const clickHandler = async (character) => {
@@ -100,31 +94,14 @@ const handleInfoButton =()=>{
       if (!response.ok) {
         throw new Error("Something went wrong");
       }
-
       const data = await response.json();
- 
     } catch (err) {
       console.log(err);
     }
   };
 
    
-  const handleRemoveCharacter = async (avenger) => {
-    console.log(avenger);
-    await fetch(`http://localhost:3000/heroes/${avenger._id}`, {
-      method: "Delete",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(avenger),
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error("Something went wrong");
-      })
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
-  }
+  
 
   const handleCloseCharacter = () => {
     setShowCharacter(false);
@@ -132,6 +109,7 @@ const handleInfoButton =()=>{
   };
 const handleMyAvengersButtonClick = () => {
   setShowMyAvengers(!showMyAvengers);
+
 };
 
 setTimeout(()=>{ 
@@ -140,11 +118,7 @@ setIsAnimation(false);
 
   return (
     <div>
-      {isAnimation && (
-        <div>
-          <Animation />
-        </div>
-      )}
+      {isAnimation && <Animation />}
 
       {!showCharacter && !isAnimation && !showMyAvengers && (
         <div>
@@ -154,20 +128,26 @@ setIsAnimation(false);
             searchInput={searchInput}
           />
           <button onClick={handleMyAvengersButtonClick}>My Avengers</button>
+          <DisplayCharacters
+            characters={filteredCharacters}
+            handleCharacterClick={handleCharacterClick}
+            handleCharacterInfoClick={handleCharacterInfoClick}
+          />
         </div>
       )}
 
-      {!showCharacter && !isAnimation && !showMyAvengers && (
+     {/* {!showCharacter && !isAnimation && !showMyAvengers && (
         <DisplayCharacters
           characters={filteredCharacters}
           handleCharacterClick={handleCharacterClick}
           handleCharacterInfoClick={handleCharacterInfoClick}
         />
-      )}
+      )} */}
 
       {!showCharacter && !isAnimation && showMyAvengers && (
-        <MyAvengers handleRemoveCharacter={handleRemoveCharacter} 
-        handleCloseCharacter={handleCloseCharacter}/>
+        <MyAvengers
+          handleCloseCharacter={handleCloseCharacter}
+        />
       )}
 
       {showCharacter && !isAnimation && (
@@ -178,6 +158,8 @@ setIsAnimation(false);
           handleCloseCharacter={handleCloseCharacter}
         />
       )}
+
+      <div></div>
     </div>
   );
 }
