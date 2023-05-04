@@ -1,18 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 
-const DisplaySingleCharacter = ({ character, handleCharacterClick }) => {
-const [story, setStory] = useState([]);
+const DisplaySingleCharacter = ({
+  character,
+  handleCharacterClick,
+  handleCloseCharacter,
+}) => {
+  console.log(character);
 
-console.log('displaySingle', character);
-const url = character.urls[0].url;
-console.log('url', url);
-
-  async function getStory(url) {
-    const storyRes = await fetch(url);
-    const storyArray = await storyRes.json();
-   setStory(storyArray);
-  }
-  getStory();
+  const displayItems = (items) => {
+    return items.map((item, index) => <li key={index}>{item.name}</li>);
+  };
 
   return (
     <div>
@@ -22,8 +19,18 @@ console.log('url', url);
         alt={character.name}
       />
       <h4>{character.description}</h4>
-      <h4>{story}</h4>
-      <button onClick={() => handleCharacterClick(character)}>Add to Favorites</button>
+
+      <h5>Comics:</h5>
+      <ul>{displayItems(character.comics.items)}</ul>
+
+      <h5>Series:</h5>
+      <ul>{displayItems(character.series.items)}</ul>
+
+      <h5>Stories:</h5>
+      <ul>{displayItems(character.stories.items)}</ul>
+
+      <button onClick={() => handleCharacterClick()}>Save</button>
+      <button onClick={handleCloseCharacter}>Close</button>
     </div>
   );
 };
