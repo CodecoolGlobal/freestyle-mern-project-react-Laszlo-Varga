@@ -61,3 +61,31 @@ button{
 .font-link{
   font-family: 'Marvel', sans-serif;
 }
+#input{
+  width: 60%;
+  height: 40px;
+  margin: 15px 10px;
+  border-radius: 5px;
+}
+#inputDiv{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#myAvengersButtonDiv{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+#myAvengersButton{
+  border-radius: 5px;
+}
+.singleName{
+  color: white;
+}
+#picAndDesc{
+  display: flex;
+  width: 50%;
+  
+}

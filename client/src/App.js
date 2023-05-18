@@ -127,7 +127,9 @@ setIsAnimation(false);
             handleChange={handleChange}
             searchInput={searchInput}
           />
-          <button onClick={handleMyAvengersButtonClick}>My Avengers</button>
+          <div id='myAvengersButtonDiv'>
+          <button id='myAvengersButton' onClick={handleMyAvengersButtonClick}>My Avengers</button>
+          </div>
           <DisplayCharacters
             characters={filteredCharacters}
             handleCharacterClick={handleCharacterClick}
