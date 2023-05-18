@@ -100,8 +100,14 @@ button:hover{
 }
 
 .myAvengers{
-  display: flex;
-  flex-direction: row;
+  
+  display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 21%;
+    gap: 3px;
+    overflow-x: scroll;
+    height: fit-content;
+    scroll-behavior: smooth;
 }
 .avengerContainer{
   display: flex;

@@ -4,8 +4,8 @@ import DisplayCharacters from "./Components/DisplayCharacters";
 import SearchBar from "./Components/SearchBar";
 import DisplaySingleCharacter from "./Components/DisplaySingleCharacter";
 import MyAvengers from "./Components/MyAvengers";
-import Animation from "./Components/Animation"
-import './styles/app.css';
+import Animation from "./Components/Animation";
+import "./styles/app.css";
 
 function MarvelCharacters() {
   const [characters, setCharacters] = useState([]);
@@ -13,33 +13,14 @@ function MarvelCharacters() {
   const [character, setCharacter] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [showCharacter, setShowCharacter] = useState(false);
-  const [ isAnimation,setIsAnimation ] = useState(true);
+  const [isAnimation, setIsAnimation] = useState(true);
   const [showMyAvengers, setShowMyAvengers] = useState(false);
 
+  const handleCharacterInfoClick = (character) => {
+    setCharacter(character);
+    setShowCharacter(true);
+  };
 
-
-    const handleCharacterInfoClick = (character) => {
-      setCharacter(character);
-      setShowCharacter(true);
-    };
-
-  useEffect(() => {
-  
-     const ts = new Date().getTime();
-     const privateKey = "666b92b8ab04d83da5d59922b7d5d3611b6bd393";
-     const publicKey = "cc0343e9c73f6dead5ff80ea4654be13";
-     const hash = md5(ts + privateKey + publicKey);
-
-     const [timestamp, apiKey, hashValue] = [ts, publicKey, hash];
-
-  const url = `https://gateway.marvel.com:443/v1/public/characters?limit=76&ts=${timestamp}&apikey=${apiKey}&hash=${hashValue}`;
-  async function getCharacters(url) {
-    const charactersRes = await fetch(url);
-    const charactersArray = await charactersRes.json();
-    setCharacters(charactersArray.data.results);
-  }
-  getCharacters(url);
-},[]) 
   useEffect(() => {
     const ts = new Date().getTime();
     const privateKey = "666b92b8ab04d83da5d59922b7d5d3611b6bd393";
@@ -48,9 +29,21 @@ function MarvelCharacters() {
 
     const [timestamp, apiKey, hashValue] = [ts, publicKey, hash];
 
- 
+    const url = `https://gateway.marvel.com:443/v1/public/characters?limit=76&ts=${timestamp}&apikey=${apiKey}&hash=${hashValue}`;
+    async function getCharacters(url) {
+      const charactersRes = await fetch(url);
+      const charactersArray = await charactersRes.json();
+      setCharacters(charactersArray.data.results);
+    }
+    getCharacters(url);
+  }, []);
+  useEffect(() => {
+    const ts = new Date().getTime();
+    const privateKey = "666b92b8ab04d83da5d59922b7d5d3611b6bd393";
+    const publicKey = "cc0343e9c73f6dead5ff80ea4654be13";
+    const hash = md5(ts + privateKey + publicKey);
 
-   
+    const [timestamp, apiKey, hashValue] = [ts, publicKey, hash];
 
     async function getCharactersByNameStart(urlOfNames) {
       const charactersRes = await fetch(urlOfNames);
@@ -64,24 +57,18 @@ function MarvelCharacters() {
     } else {
       setFilteredCharacters(characters);
     }
-  }, [searchInput,characters]);
+  }, [searchInput, characters]);
 
   const handleChange = (e) => {
     e.preventDefault();
     setSearchInput(e.target.value);
   };
 
-
-
   const handleCharacterClick = (character) => {
     setCharacter(character);
     console.log(character);
     clickHandler(character);
   };
-
-
-
-
 
   const clickHandler = async (character) => {
     try {
@@ -91,30 +78,31 @@ function MarvelCharacters() {
         body: JSON.stringify(character),
       });
 
+      if (response.ok) {
+        window.alert("Hero saved!");
+        return response.json();
+      }
+
       if (!response.ok) {
         throw new Error("Something went wrong");
       }
-      const data = await response.json();
+      //const data = await response.json();
     } catch (err) {
       console.log(err);
     }
   };
 
-   
-  
-
   const handleCloseCharacter = () => {
     setShowCharacter(false);
- setShowMyAvengers(false)
+    setShowMyAvengers(false);
   };
-const handleMyAvengersButtonClick = () => {
-  setShowMyAvengers(!showMyAvengers);
+  const handleMyAvengersButtonClick = () => {
+    setShowMyAvengers(!showMyAvengers);
+  };
 
-};
-
-setTimeout(()=>{ 
-setIsAnimation(false);
- },7000)
+  setTimeout(() => {
+    setIsAnimation(false);
+  }, 7000);
 
   return (
     <div>
@@ -127,8 +115,10 @@ setIsAnimation(false);
             handleChange={handleChange}
             searchInput={searchInput}
           />
-          <div id='myAvengersButtonDiv'>
-          <button id='myAvengersButton' onClick={handleMyAvengersButtonClick}>My Avengers</button>
+          <div id="myAvengersButtonDiv">
+            <button id="myAvengersButton" onClick={handleMyAvengersButtonClick}>
+              My Avengers
+            </button>
           </div>
           <DisplayCharacters
             characters={filteredCharacters}
@@ -138,7 +128,7 @@ setIsAnimation(false);
         </div>
       )}
 
-     {/* {!showCharacter && !isAnimation && !showMyAvengers && (
+      {/* {!showCharacter && !isAnimation && !showMyAvengers && (
         <DisplayCharacters
           characters={filteredCharacters}
           handleCharacterClick={handleCharacterClick}
@@ -147,9 +137,7 @@ setIsAnimation(false);
       )} */}
 
       {!showCharacter && !isAnimation && showMyAvengers && (
-        <MyAvengers
-          handleCloseCharacter={handleCloseCharacter}
-        />
+        <MyAvengers handleCloseCharacter={handleCloseCharacter} />
       )}
 
       {showCharacter && !isAnimation && (
@@ -165,6 +153,5 @@ setIsAnimation(false);
     </div>
   );
 }
-
 
 export default MarvelCharacters;
