@@ -11,7 +11,7 @@ const DisplaySingleCharacter = ({character, handleCharacterClick, handleCloseCha
   };
 
   return (
-    <div>
+    <div className="singleCharContainer">
       <h3 className="singleName">{character.name}</h3>
       <div id="picAndDesc">
         <img

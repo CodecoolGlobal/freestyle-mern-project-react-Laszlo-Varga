@@ -19,9 +19,7 @@ body {
   align-items: center;
 }
 
-button {
-  border-radius: 30;
-}
+
 
 
 .mainImage{
@@ -68,6 +66,8 @@ button {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
+
 }
 .cardContainer{
  position: relative;
@@ -82,8 +82,25 @@ button {
 }
 button{
   height: 40px;
-  border-radius: 30;
+  border-radius: 5px;
 }
 .font-link{
   font-family: 'Marvel', sans-serif;
+}
+
+.singleName{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}  
+
+.title{
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  color: white;
+  font-size: 400%;
+  margin-top:  10%;
+  margin-bottom: 7%;
+
 }

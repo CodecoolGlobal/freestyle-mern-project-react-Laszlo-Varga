@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../App.css"
+import "../styles/app.css"
 
 const MyAvengers = ({handleCloseCharacter }) => {
   const [avengers, setAvengers] = useState([]);
@@ -41,6 +42,9 @@ const handleRemoveCharacter =  (avenger) => {
 
   return (
     <div>
+      <div className="title">MY AVENGERS</div>
+    <div className="avengerContainer">
+    <div className="myAvengers">
       {avengers.map((avenger) => (
         <div key={avenger._id}>
           <h3>{avenger.name}</h3>
@@ -50,13 +54,17 @@ const handleRemoveCharacter =  (avenger) => {
             alt={avenger.name}
           />
           <div className="buttonContainer">
-          <button onClick={() => handleRemoveCharacter(avenger)}>
+          <button type="button" onClick={() => handleRemoveCharacter(avenger)}>
             Remove from team
           </button>
           </div>
         </div>
       ))}
-      <button onClick={handleCloseCharacter}>Back</button>
+    </div>
+    <div>
+      <button className="backButton" type="button" onClick={handleCloseCharacter}>Back</button>
+    </div>
+    </div>
     </div>
   );
 };
