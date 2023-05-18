@@ -54,6 +54,14 @@
  
   
 }
+button{
+  height: 40px;
+  border-radius: 5px;
+}
+button:hover{
+  background-color: rgba(184, 1, 1, 0.812);
+
+}
 
 .font-link{
   font-family: 'Marvel', sans-serif;
@@ -103,10 +111,18 @@
 
 .backButton{
   
-  margin-top: 30%;
+  margin-top: 47%;
   align-items: center;
   justify-content: center;
   height: 60px;
   width: 150px;
   border-radius: 5px;
+}
+#myAvengerCont{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#singleAvenger{
+  text-shadow: 2px 2px black;
 }
