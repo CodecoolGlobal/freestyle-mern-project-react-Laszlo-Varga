@@ -37,6 +37,7 @@ function MarvelCharacters() {
     }
     getCharacters(url);
   }, []);
+
   useEffect(() => {
     const ts = new Date().getTime();
     const privateKey = "666b92b8ab04d83da5d59922b7d5d3611b6bd393";
@@ -50,16 +51,17 @@ function MarvelCharacters() {
       const charactersArray = await charactersRes.json();
       setFilteredCharacters(charactersArray.data.results);
     }
-
     if (searchInput.length > 0) {
-      const urlOfnames = `https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${searchInput}&limit=10&ts=${timestamp}&apikey=${apiKey}&hash=${hashValue}`;
+      const urlOfnames = `https://gateway.marvel.com:443/v1/public/characters
+      ?nameStartsWith=${searchInput}
+      &limit=10&ts=${timestamp}&apikey=${apiKey}&hash=${hashValue}`;
       getCharactersByNameStart(urlOfnames);
     } else {
       setFilteredCharacters(characters);
     }
   }, [searchInput, characters]);
 
-  const handleChange = (e) => {
+  const handleInputChange = (e) => {
     e.preventDefault();
     setSearchInput(e.target.value);
   };
@@ -112,7 +114,7 @@ function MarvelCharacters() {
         <div>
           <SearchBar
             placeholder="Search here"
-            handleChange={handleChange}
+            onInputChange={handleInputChange}
             searchInput={searchInput}
           />
           <div id="myAvengersButtonDiv">

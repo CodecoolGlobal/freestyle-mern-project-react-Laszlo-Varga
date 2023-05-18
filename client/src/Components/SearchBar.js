@@ -1,14 +1,14 @@
 import React from "react";
 import "../styles/app.css"
 
-const SearchBar = ({ placeholder, handleChange, searchInput }) => {
+const SearchBar = ({ placeholder, onInputChange, searchInput }) => {
   return (
     <div id='inputDiv'>
     <input
       id='input'
       type="search"
       placeholder={placeholder}
-      onChange={handleChange}
+      onChange={onInputChange}
       value={searchInput}
     />
     </div>
