@@ -46,8 +46,8 @@ const handleRemoveCharacter =  (avenger) => {
     <div className="avengerContainer">
     <div className="myAvengers">
       {avengers.map((avenger) => (
-        <div key={avenger._id}>
-          <h3>{avenger.name}</h3>
+        <div id="myAvengerCont" key={avenger._id}>
+          <h3 id="singleAvenger"className="singleName">{avenger.name}</h3>
           <img
             className="mainImage"
             src={`${avenger.thumbnail.path}.${avenger.thumbnail.extension}`}
