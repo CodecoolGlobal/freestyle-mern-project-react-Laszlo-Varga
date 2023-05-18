@@ -1,5 +1,5 @@
 import React from "react";
-import '../App.css'
+import "../styles/app.css"
 
 const SearchBar = ({ placeholder, handleChange, searchInput }) => {
   return (
