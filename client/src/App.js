@@ -52,9 +52,7 @@ function MarvelCharacters() {
       setFilteredCharacters(charactersArray.data.results);
     }
     if (searchInput.length > 0) {
-      const urlOfnames = `https://gateway.marvel.com:443/v1/public/characters
-      ?nameStartsWith=${searchInput}
-      &limit=10&ts=${timestamp}&apikey=${apiKey}&hash=${hashValue}`;
+      const urlOfnames = `https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${searchInput}&limit=10&ts=${timestamp}&apikey=${apiKey}&hash=${hashValue}`;
       getCharactersByNameStart(urlOfnames);
     } else {
       setFilteredCharacters(characters);
